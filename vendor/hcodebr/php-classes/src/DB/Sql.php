@@ -40,6 +40,7 @@
             $stmt->execute();
         }
 
+        // Método Select
         public function select($rawQuery, $params = array()):array
         {
             $stmt = $this->conn->prepare($rawQuery);
