@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "" : "vendor\\php7-curso\\php-classes\\src"
+            "Hcode\\" : "vendor\\hcodebr\\php-classes\\src"
         }
     }
 }
