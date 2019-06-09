@@ -3,6 +3,7 @@
 
     use \Slim\Slim;
     use \Hcode\Page;
+    use \Hcode\PageAdmin;
 
     $app = new Slim();
 
@@ -13,6 +14,13 @@
         $page = new Page();
         $page->setTpl("index");
         //var_dump($page);
+
+    });
+
+    $app->get('/admin', function()
+    {
+        $page = new PageAdmin();
+        $page->setTpl("index");
 
     });
 
