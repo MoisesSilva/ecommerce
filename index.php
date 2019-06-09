@@ -13,15 +13,14 @@
 
         $page = new Page();
         $page->setTpl("index");
-        //var_dump($page);
+        
 
     });
 
-    $app->get('/admin', function()
-    {
+    $app->get('./admin/', function(){
         $page = new PageAdmin();
         $page->setTpl("index");
-
+        var_dump($page);
     });
 
     $app->run();
