@@ -1,17 +1,18 @@
 <?php
     require_once("vendor/autoload.php");
 
-    //use \Slim\Slim;
+    use \Slim\Slim;
     use \Hcode\Page;
 
-    $app = new \Slim\Slim();
+    $app = new Slim();
 
-    $app->config('debug', false);
+    $app->config('debug', true);
 
     $app->get('/', function() {
 
         $page = new Page();
         $page->setTpl("index");
+        //var_dump($page);
 
     });
 

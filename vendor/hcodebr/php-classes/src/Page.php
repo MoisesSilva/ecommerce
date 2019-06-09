@@ -9,47 +9,55 @@ class Page {
     private $tpl;
     private $options = [];
     private $defaults = [
-        "header"=>true,
-        "footer"=>true,
+        //"header"=>true,
+        //"footer"=>true,
         "data"=>[]
     ];
 
     public function __construct($opts = array())
     {
+        //var_dump($this->tpl);
         $this->options = array_merge($this->defaults, $opts);
 
         $config = array(
-            "tpl_dir"   => $_SERVER['DOCUMENT_ROOT']."../views/",
-            "cache_dir" => $_SERVER['DOCUMENT_ROOT']."../views-caches/",
+            "tpl_dir"   => "views/",
+            "cache_dir" => $_SERVER["DOCUMENT_ROOT"]."views-caches/",
             "debug"     => false
         );
 
         Tpl::configure($config);
 
-        $this->tpl = new Tpl;
+        $this->tpl = new Tpl();
+
+        foreach ($this->options["data"] as $key => $val) {
+            $this->tpl->assign($key, $val);
+        }
 
         $this->setData($this->options["data"]);
+        //if ($this->options['data']) $this->setData($this->options['data']);
+        //if ($this->options['header'] === true) $this->tpl->draw("header", false);
 
         // Desenhando o header
         $this->tpl->draw("header");
+        
     }
 
     // Método para receber os dados da view
     private function setData($data = array())
     {
-        foreach ($data as $key => $value) {
-            $this->tpl->assign($key, $value);
+        foreach ($data as $key => $val) {
+            $this->tpl->assign($key, $val);
         }
     }
 
-    public function setTpl($name, $data = array(), $returnHTML = false)
+    public function setTpl($tplname, $data = array(), $returnHTML = false)
     {
         $this->setData($data);
+        return $this->tpl->draw($tplname, $returnHTML);
 
-        return $this->tpl->draw($name, $returnHTML);
     }
 
-    public function destruct()
+    public function __destruct()
     {   
         // Desenhando o footer
         $this->tpl->draw("footer");
